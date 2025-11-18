@@ -23,13 +23,16 @@ def create():
     student["birthdate"] = input("Enter birthdate: ")
     student["grade"] = input("Enter grade: ")
     student["email"] = input("Enter email: ")
+    return student
 def loop(information):
-    
-    s = input("what would you like to know?: ")
-    if s in information: 
-        print(information[s])
-    elif s == "Quit" or s == "quit":
-        break
-    else:
-        print("We do not store that information")
-
+    quit = False
+    while quit == False:
+        s = input("what would you like to know?: ")
+        if s in information: 
+            print(information[s])
+        elif s == "Quit" or s == "quit":
+            break
+        else:
+            print("We do not store that information")
+information = create()
+loop(information)
