@@ -36,3 +36,76 @@ You have:
  3 wood
  >
 """
+def get(cmd,inventory,options):
+    x = cmd.split()
+    for i in x:
+        if i in options: 
+            label = i 
+    n = 1
+    for i in x: 
+        try:
+            y = int(i)
+        except:
+            y = 1
+        if y > 1:
+            n=y 
+            break
+    try:
+        inventory[label] = int(inventory[label]) + int(n)
+    except:
+        inventory[label] = int(n)
+    return inventory
+    
+
+
+def drop(cmd,inventory,options):
+    x = cmd.split()
+    for i in x:
+        if i in options: 
+            label = i
+    n = 1
+    for i in x:
+        try:
+            y = int(i)
+        except:
+            y = 1
+        if y > 1:
+            n=y 
+            break
+    try:
+        p = int(inventory[label])
+    except:
+        print(f"You do not have enough {label} to drop.")
+        return inventory
+    d = p-n
+    if d > 0:
+        inventory[label] = d
+    elif d == 0:
+        del inventory[label]
+    else:
+        print(f"You do not have enough {label} to drop.")
+    return inventory
+
+    
+    
+
+    
+
+
+def play(inventory,options):
+    quit = False
+    while quit == False:
+        cmd = input("Enter command: ")
+        if "inventory" in cmd or "i/" in cmd: 
+            print(inventory)
+        if "get" in cmd or "g/" in cmd: 
+            inventory = get(cmd,inventory,options)
+        if "drop" in cmd or "d/" in cmd:
+            drop(cmd,inventory,options)
+        if "quit" in cmd:
+            quit = True
+    
+inventory = {}
+options = ["food", 'water', 'rope', 'torch', 'sack', 'wood', 'iron','steel','ginger','garlic','fish','stone','wool',]
+
+play(inventory,options)
